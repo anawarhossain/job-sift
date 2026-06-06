@@ -1,4 +1,5 @@
 "use client";
+// ✅ Leaf-level client component — শুধু এখানেই useState প্রয়োজন
 
 import { useState } from "react";
 import { Compass, Magnifier } from "@gravity-ui/icons";
@@ -10,62 +11,88 @@ export function HeroSearchForm({ trendingPositions }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Searching for:", { search, location });
-    // আপনার সার্চ লজিক বা রাউটিং এখানে লিখুন
+    // TODO: router.push(`/jobs?q=${search}&loc=${location}`)
+    console.log("Searching:", { search, location });
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-5">
-      {/* মেইন সার্চ বার কন্টেইনার */}
+    <div className="w-full max-w-3xl mx-auto flex flex-col items-center gap-4">
+      {/* ── মেইন সার্চ বার ── */}
       <form
         onSubmit={handleSearch}
-        className="w-full flex items-center gap-2 rounded-full border border-white/10 bg-[#0d0d0d]/60 p-2 pl-4 sm:pl-6 backdrop-blur-xl shadow-2xl focus-within:border-indigo-500/50 transition-all"
+        role="search"
+        aria-label="Job search"
+        className="w-full flex items-center gap-2 rounded-full border border-white/8 bg-[#0d0d0d]/70 p-1.5 pl-5 backdrop-blur-xl shadow-2xl
+                   focus-within:border-indigo-500/50 transition-all duration-200"
       >
-        {/* প্রথম ইনপুট: জব টাইটেল বা কোম্পানি */}
-        <div className="flex flex-1 items-center gap-3">
-          <Magnifier className="text-zinc-500 text-lg shrink-0" />
+        {/* জব টাইটেল ইনপুট */}
+        <div className="flex flex-1 items-center gap-3 min-w-0">
+          <Magnifier
+            className="text-zinc-500 shrink-0 w-4 h-4"
+            aria-hidden="true"
+          />
           <input
-            type="text"
+            id="job-search"
+            type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Job title, skill or company"
-            className="w-full bg-transparent text-sm text-zinc-200 placeholder-zinc-600 outline-none py-2"
+            autoComplete="off"
+            className="w-full bg-transparent text-sm text-zinc-200 placeholder-zinc-600 outline-none py-2 min-w-0"
           />
         </div>
 
-        {/* মাঝখানের ডিভাইডার লাইন */}
-        <span className="h-6 w-px bg-zinc-800 hidden sm:inline-block mx-2" />
+        {/* ডিভাইডার — শুধু sm+ এ দেখাবে */}
+        <span
+          className="hidden sm:inline-block h-5 w-px bg-zinc-800 mx-1 shrink-0"
+          aria-hidden="true"
+        />
 
-        {/* দ্বিতীয় ইনপুট: লোকেশন */}
-        <div className="flex flex-1 items-center gap-3 hidden sm:flex">
-          <Compass className="text-zinc-500 text-lg shrink-0" />
+        {/* লোকেশন ইনপুট — ✅ `hidden sm:flex` conflict ঠিক করা হলো */}
+        <div className="hidden sm:flex flex-1 items-center gap-3 min-w-0">
+          <Compass
+            className="text-zinc-500 shrink-0 w-4 h-4"
+            aria-hidden="true"
+          />
           <input
+            id="location-search"
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="Location or Remote"
-            className="w-full bg-transparent text-sm text-zinc-200 placeholder-zinc-600 outline-none py-2"
+            autoComplete="off"
+            className="w-full bg-transparent text-sm text-zinc-200 placeholder-zinc-600 outline-none py-2 min-w-0"
           />
         </div>
 
-        {/* সার্চ বাটন (ইমেজের মতো ব্লু/পার্পল রাউন্ডেড বাটন) */}
+        {/* সার্চ বাটন */}
         <button
           type="submit"
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-linear-to-r from-[#4f46e5] to-[#6366f1] text-white shadow-lg shadow-indigo-500/20 hover:opacity-90 active:scale-95 transition-all shrink-0"
+          aria-label="Search jobs"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full
+                     bg-gradient-to-r from-[#4f46e5] to-[#6366f1]
+                     text-white shadow-lg shadow-indigo-500/25
+                     hover:opacity-90 active:scale-95 transition-all duration-150
+                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         >
-          <Magnifier className="text-lg" strokeWidth={2.5} />
+          <Magnifier className="w-4 h-4" aria-hidden="true" />
         </button>
       </form>
 
-      {/* ট্রেন্ডিং পজিশন ট্যাগসমূহ */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-1 text-xs sm:text-sm">
-        <span className="text-zinc-500">Trending Position</span>
+      {/* ── ট্রেন্ডিং পজিশন ট্যাগ ── */}
+      <div
+        className="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm"
+        aria-label="Trending positions"
+      >
+        <span className="text-zinc-600 text-xs">Trending:</span>
         {trendingPositions.map((position) => (
           <button
             key={position}
             type="button"
             onClick={() => setSearch(position)}
-            className="rounded-full border border-white/5 bg-[#141414] px-4 py-1.5 text-zinc-400 hover:text-white hover:border-zinc-700 transition-all"
+            className="rounded-full border border-white/5 bg-[#141414] px-3.5 py-1.5 text-xs text-zinc-400
+                       hover:text-white hover:border-zinc-700 hover:bg-[#1a1a1a]
+                       transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             {position}
           </button>

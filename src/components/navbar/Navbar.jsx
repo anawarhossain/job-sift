@@ -1,7 +1,8 @@
-"use client"
-import { useState } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import { Link } from "@heroui/react";
-import { cn } from "@/lib/utils"; // আপনার প্রোজেক্টের cn utility পাথ অনুযায়ী চেঞ্জ করতে পারেন
+import { cn } from "@/lib/utils";
 
 const maxWidthClasses = {
   sm: "max-w-[640px]",
@@ -17,42 +18,60 @@ export function Navbar({
   items,
   rightContent,
   className,
-  maxWidth = "xl", // ইমেজ অনুযায়ী একটু চওড়া লেআউট বেটার দেখাবে
+  maxWidth = "xl",
   position = "sticky",
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // স্ক্রল হলে navbar-এ border দেখাবে — ডিজাইনের নেটিভ ফিল আনবে
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // মোবাইল মেনু খোলা থাকলে body scroll বন্ধ রাখো
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <nav
       className={cn(
-        "z-40 w-full bg-transparent py-4 px-4 sm:px-6", // বাইরের মেইন ব্যাকগ্রাউন্ড ট্রান্সপারেন্ট রাখছি যেন ফ্লোটিং ফিল আসে
+        "z-40 w-full py-4 px-4 sm:px-6 transition-all duration-300",
         position === "sticky" && "sticky top-0",
         position === "fixed" && "fixed top-0",
         className,
       )}
     >
-      {/* ছবির মতো রাউন্ডেড এবং ডার্ক ফ্লোটিং কন্টেইনার */}
       <div
         className={cn(
-          "w-full rounded-2xl border border-white/5 bg-[#121212]/80 px-6 backdrop-blur-xl shadow-2xl",
+          "w-full rounded-2xl px-6 transition-all duration-300",
           maxWidth !== "full" && maxWidthClasses[maxWidth],
           "mx-auto",
+          // স্ক্রল করলে আরো opaque + border visible হয়
+          scrolled
+            ? "bg-[#0a0a0a]/90 border border-white/8 backdrop-blur-xl shadow-2xl shadow-black/40"
+            : "bg-[#121212]/70 border border-white/5 backdrop-blur-md",
         )}
       >
         <header className="flex h-16 items-center justify-between">
-          {/* বাম পাশে লোগো এরিয়া */}
+          {/* বাম — লোগো */}
           <div className="flex items-center gap-4">{brand}</div>
 
-          {/* ডান পাশে মেনু আইটেমস এবং রাইট কন্টেন্ট */}
+          {/* ডান — ডেস্কটপ মেনু */}
           <div className="flex items-center gap-6">
-            {/* ডেক্সটপ মেনু লিংকস */}
             <ul className="hidden items-center gap-6 md:flex">
               {items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     className={cn(
-                      "text-sm font-medium transition-colors text-zinc-400 hover:text-zinc-100",
+                      "text-sm font-medium transition-colors duration-200 text-zinc-400 hover:text-zinc-100",
                       item.isActive && "text-zinc-100 font-semibold",
                     )}
                     aria-current={item.isActive ? "page" : undefined}
@@ -63,19 +82,19 @@ export function Navbar({
               ))}
             </ul>
 
-            {/* ডেক্সটপ রাইট কন্টেন্ট (বাটন এবং ডিভাইডার) */}
             {rightContent && (
               <div className="hidden items-center gap-4 md:flex">
                 {rightContent}
               </div>
             )}
 
-            {/* মোবাইল মেনু টগল বাটন */}
+            {/* মোবাইল hamburger */}
             <button
-              className="block md:hidden text-zinc-400 hover:text-zinc-100 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
+              className="block md:hidden text-zinc-400 hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-md p-1"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               <svg
                 className="h-6 w-6"
@@ -103,23 +122,28 @@ export function Navbar({
           </div>
         </header>
 
-        {/* মোবাইল রেসপন্সিভ ড্রপডাউন মেনু */}
+        {/* মোবাইল ড্রপডাউন */}
         {isMenuOpen && (
-          <div className="border-t border-white/5 md:hidden pb-4 pt-2">
+          <div
+            id="mobile-menu"
+            className="border-t border-white/5 md:hidden pb-5 pt-3"
+          >
             <ul className="flex flex-col gap-1">
               {items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
                     className={cn(
-                      "block py-2 text-zinc-400 hover:text-zinc-100 text-sm",
-                      item.isActive && "text-zinc-100 font-medium",
+                      "block py-2.5 px-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-white/5 text-sm transition-all",
+                      item.isActive && "text-zinc-100 font-medium bg-white/5",
                     )}
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
+
               {rightContent && (
                 <li className="mt-4 flex flex-col gap-3 border-t border-white/5 pt-4">
                   {rightContent}

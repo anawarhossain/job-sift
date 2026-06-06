@@ -1,73 +1,80 @@
+// Server Component — PricingToggle (client) e data pass kora hoy
 import { PricingToggle } from "./PricingToggle";
-import { Compass, FolderFlows, ChartLine } from "@gravity-ui/icons";
+
+// Icon strings pass korbo — JSX server component theke serializable
+// PricingToggle nijer moto icon render korbe
+const plans = [
+  {
+    name: "Starter",
+    desc: "Perfect for job seekers just getting started.",
+    priceMonthly: 0,
+    priceYearly: 0,
+    iconKey: "compass",
+    isPopular: false,
+    features: [
+      "Daily AI match brief (top 5)",
+      "Verified salary trends",
+      "Company insight dashboards",
+      "1-click apply, unlimited",
+    ],
+  },
+  {
+    name: "Growth",
+    desc: "Start building your insights hub.",
+    priceMonthly: 17,
+    priceYearly: 14,
+    iconKey: "chart",
+    isPopular: true,
+    features: [
+      "Everything in Starter",
+      "Daily AI match brief (top 5)",
+      "Verified salary trends",
+      "Company insight dashboards",
+      "1-click apply, unlimited",
+    ],
+  },
+  {
+    name: "Premium",
+    desc: "Start building your insights hub.",
+    priceMonthly: 99,
+    priceYearly: 79,
+    iconKey: "star",
+    isPopular: false,
+    features: [
+      "Everything in Pro",
+      "Multi-profile career portfolios",
+      "Shared talent rooms",
+      "Recruiter view (read-only)",
+    ],
+  },
+];
 
 export function PricingSection() {
-  // সার্ভার ডেটা যা ক্লায়েন্ট টগলে পাস করা হবে
-  const plans = [
-    {
-      name: "Starter",
-      desc: "Perfect for fast-growing startups.",
-      priceMonthly: 0,
-      priceYearly: 0,
-      icon: <Compass />,
-      isPopular: false,
-      features: [
-        "Access to 50K+ live job listings",
-        "Basic candidate screening profile",
-        "Standard multi-criteria filtering",
-        "Community support channel",
-      ],
-    },
-    {
-      name: "Growth",
-      desc: "Built for scaling businesses and teams.",
-      priceMonthly: 19,
-      priceYearly: 15, // ২০% ডিসকাউন্ট সহ
-      icon: <FolderFlows />,
-      isPopular: true,
-      features: [
-        "Everything in Starter plan",
-        "Advanced AI screening & sorting",
-        "Full ATS Integration & workflows",
-        "Priority live-chat support 24/7",
-        "Custom application tracking tags",
-      ],
-    },
-    {
-      name: "Enterprise",
-      desc: "Custom leverage for corporate hiring.",
-      priceMonthly: 99,
-      priceYearly: 79,
-      icon: <ChartLine />,
-      isPopular: false,
-      features: [
-        "Everything in Growth plan",
-        "Unlimited worker AI automation",
-        "Dedicated account hiring manager",
-        "Custom branding & white-label",
-        "Advanced dashboard & API access",
-      ],
-    },
-  ];
-
   return (
-    <section className="w-full bg-black text-white py-24 px-4 sm:px-6 border-t border-white/5 relative overflow-hidden">
-      {/* ব্যাকগ্রাউন্ড হালকা লাইটিং ইফেক্ট */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-500/5 rounded-full blur-[140px] pointer-events-none" />
+    <section
+      className="w-full bg-black text-white py-24 px-4 sm:px-6 border-t border-white/5 relative overflow-hidden"
+      aria-label="Pricing plans"
+    >
+      {/* Subtle bg glow */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                   w-[700px] h-[300px] bg-indigo-500/5 rounded-full blur-[140px] pointer-events-none"
+      />
 
-      <div className="max-w-6xl mx-auto flex flex-col items-center gap-6 relative z-10">
-        {/* সেকশন হেডার */}
+      <div className="max-w-5xl mx-auto flex flex-col items-center gap-8 relative z-10">
+        {/* Header */}
         <div className="text-center flex flex-col gap-3">
           <span className="text-xs font-semibold text-[#6366f1] uppercase tracking-widest">
-            Pricing Plans
+            Pricing
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
             Pay for the leverage, <br /> not the listings
           </h2>
         </div>
 
-        {/* ক্লায়েন্ট টগল কন্টেইনার কল করা হলো */}
-        <div className="w-full mt-6">
+        {/* Client toggle + cards */}
+        <div className="w-full">
           <PricingToggle plans={plans} />
         </div>
       </div>
