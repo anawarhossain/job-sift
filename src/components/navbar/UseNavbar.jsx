@@ -16,7 +16,7 @@ const UseNavbar = () => {
                 src="/jobsift_logo.png"
                 alt="Jobshift"
                 fill
-                sizes="40"
+                sizes="112"
                 loading="eager"
                 className="object-contain"
               />
