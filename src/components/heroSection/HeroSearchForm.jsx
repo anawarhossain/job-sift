@@ -22,8 +22,7 @@ export function HeroSearchForm({ trendingPositions }) {
         onSubmit={handleSearch}
         role="search"
         aria-label="Job search"
-        className="w-full flex items-center gap-2 rounded-full border border-white/8  p-1.5 pl-5 backdrop-blur-xl shadow-2xl
-                   focus-within:border-indigo-500/50 transition-all duration-200"
+        className="w-full flex items-center gap-2 rounded-full border border-white/8 p-1.5 pl-5 backdrop-blur-xl shadow-2xl focus-within:border-indigo-500/50 transition-all duration-200"
       >
         {/* জব টাইটেল ইনপুট */}
         <div className="flex flex-1 items-center gap-3 min-w-0">
@@ -69,11 +68,7 @@ export function HeroSearchForm({ trendingPositions }) {
         <button
           type="submit"
           aria-label="Search jobs"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full
-                     bg-linear-to-r from-[#4f46e5] to-[#6366f1]
-                     text-white shadow-lg shadow-indigo-500/25
-                     hover:opacity-90 active:scale-95 transition-all duration-150
-                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-[#4f46e5] to-[#6366f1] text-white shadow-lg shadow-indigo-500/25 hover:opacity-90 active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         >
           <Magnifier className="w-4 h-4" aria-hidden="true" />
         </button>
@@ -90,9 +85,7 @@ export function HeroSearchForm({ trendingPositions }) {
             key={position}
             type="button"
             onClick={() => setSearch(position)}
-            className="rounded-full border border-white/5 px-3.5 py-1.5 text-xs text-zinc-400
-                       hover:text-white hover:border-zinc-700 hover:bg-[#1a1a1a]
-                       transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            className="rounded-full border border-white/5 px-3.5 py-1.5 text-xs text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-[#1a1a1a] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             {position}
           </button>

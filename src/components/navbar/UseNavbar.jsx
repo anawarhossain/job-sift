@@ -49,7 +49,7 @@ const UseNavbar = () => {
             </Link>
 
             {/* Get Started ব্লু-পার্পল গ্রেডিয়েন্ট বাটন */}
-            <Link href={"#signup"}>
+            <Link href={"/sign-up"}>
               <Button
               radius="md"
               className="bg-linear-to-r from-[#4f46e5] to-[#6366f1] text-white font-medium shadow-lg shadow-indigo-500/20 px-5 text-sm"

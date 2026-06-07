@@ -81,10 +81,7 @@ export function PricingToggle({ plans }) {
               {isMain && (
                 <div
                   aria-label="Most popular plan"
-                  className="absolute -top-3 left-1/2 -translate-x-1/2
-                             bg-linear-to-r from-[#4f46e5] to-[#6366f1]
-                             text-white text-[10px] font-bold uppercase tracking-widest
-                             px-3 py-1 rounded-full shadow-md whitespace-nowrap"
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 bg-linear-to-r from-[#4f46e5] to-[#6366f1] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md whitespace-nowrap"
                 >
                   Most Popular
                 </div>
