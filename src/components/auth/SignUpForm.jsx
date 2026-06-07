@@ -116,7 +116,7 @@ function Spinner() {
 
 // ── Input base styles ──────────────────────────────────────────
 const inputBase =
-  "w-full  text-sm dark:text-zinc-200 text-zinc-900 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 rounded-xl border px-4 py-3 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/60";
+  "w-full text-sm dark:text-zinc-200 text-zinc-900 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 rounded-xl border px-4 py-3 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/60";
 const inputNormal = `${inputBase} dark:border-white/[0.10] dark:hover:border-white/[0.30] border-black/[0.10] hover:border-black/[0.30]`;
 const inputError = `${inputBase} border-red-500/40 focus:ring-red-500/20 focus:border-red-500/50`;
 const inputSuccess = `${inputBase} border-emerald-500/30 focus:ring-emerald-500/20`;

@@ -42,7 +42,7 @@ const UseNavbar = () => {
 
             {/* Sign In লিংক */}
             <Link
-              href="#login"
+              href="/sign-in"
               className="text-sm font-medium text-[#6366f1] hover:text-[#818cf8] transition-colors duration-200 px-2"
             >
               Sign In
