@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { HeroSearchForm } from "./HeroSearchForm";
 
@@ -11,36 +10,34 @@ const trendingPositions = [
 export function HeroSection() {
   return (
     <section
-      className="relative w-full bg-black text-white overflow-hidden"
+      className="relative w-full bg-white dark:bg-black text-zinc-900 dark:text-white overflow-hidden"
       aria-label="Hero section"
     >
       {/* ── ব্যাকগ্রাউন্ড গ্লোব ইমেজ ── */}
-      {/* <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none select-none"
-        style={{ top: "20%" }}
-      >
-        <div
-          className="relative w-full max-w-2xl"
-          style={{ aspectRatio: "3/4" }}
-        >
-          <Image
-            src="/globe.png"
-            alt=""
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 800px"
-            className="object-contain object-top"
-          />
-        </div>
-      </div> */}
 
-      {/* ── ব্যাকগ্রাউন্ড radial গ্লো ── */}
       <div
         aria-hidden="true"
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2
-                   w-[600px] h-[400px] rounded-full
-                   bg-indigo-600/10 blur-[120px] pointer-events-none animate-pulse-glow"
+        className="hidden dark:block absolute inset-x-0 bottom-0 h-full pointer-events-none select-none"
+      >
+        <Image
+          src="/globe.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-top opacity-100"
+        />
+        {/* Top-to-bottom fade: content side se seamless merge */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/30 to-transparent" />
+        {/* Bottom fade: footer transition ke smooth kora */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+      </div>
+
+      {/* Blue glow at bottom center */}
+      <div
+        aria-hidden="true"
+        className="hidden dark:block absolute bottom-0 left-1/2 -translate-x-1/2
+                         w-[500px] sm:w-[700px] h-[200px]
+                         bg-indigo-500/50 rounded-full blur-[100px] pointer-events-none"
       />
 
       {/* ── মেইন কন্টেন্ট ── */}
@@ -51,11 +48,11 @@ export function HeroSection() {
         {/* ১. Badge */}
         <div
           className="inline-flex items-center gap-2 rounded-full border border-white/8
-                        bg-gradient-to-r from-zinc-900/80 to-zinc-800/40
+                        bg-linear-to-r from-zinc-900/80 to-zinc-800/40
                         px-4 py-1.5 backdrop-blur-md shadow-inner animate-fade-up"
         >
           <span aria-hidden="true">💼</span>
-          <p className="text-xs font-medium tracking-wider uppercase text-zinc-400">
+          <p className="text-xs font-medium tracking-wider uppercase text-zinc-200">
             <span className="text-white font-bold">50,000+</span> New Jobs This
             Month
           </p>
@@ -72,7 +69,7 @@ export function HeroSection() {
 
         {/* ৩. ডেসক্রিপশন */}
         <p
-          className="text-sm sm:text-base md:text-lg text-zinc-400 max-w-xl
+          className="text-sm sm:text-base md:text-lg text-zinc-300 max-w-xl
                       leading-relaxed font-light animate-fade-up delay-200"
         >
           JobSift connects top talent with world-class companies. Browse
@@ -87,10 +84,9 @@ export function HeroSection() {
 
       {/* ── নিচের গ্লোব ওভারলে টেক্সট ── */}
       <div className="relative z-10 flex flex-col items-center pb-16 px-4">
-        <p className="text-base sm:text-lg md:text-xl font-medium text-center text-zinc-300 max-w-lg leading-relaxed">
-          Assisting over{" "}
-          <span className="text-white font-semibold">15,000+</span> job seekers
-          find their dream positions.
+        <p className="text-base sm:text-lg md:text-xl font-medium text-center text-zinc-400 max-w-lg leading-relaxed">
+          Assisting over <span className=" font-semibold">15,000+</span> job
+          seekers find their dream positions.
         </p>
       </div>
 

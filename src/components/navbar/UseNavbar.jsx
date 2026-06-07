@@ -3,6 +3,7 @@ import { Navbar } from './Navbar';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@heroui/react';
+import { ThemeToggle } from '../themeChange/ThemeToggle';
 
 const UseNavbar = () => {
     return (
@@ -35,6 +36,7 @@ const UseNavbar = () => {
         // ৩. ডান পাশের বাটন এবং ভার্টিক্যাল ডিভাইডার
         rightContent={
           <>
+            <ThemeToggle/>
             {/* চিকন ডিভাইডার লাইন */}
             <span className="hidden h-5 w-px bg-zinc-700 md:inline-block" />
 

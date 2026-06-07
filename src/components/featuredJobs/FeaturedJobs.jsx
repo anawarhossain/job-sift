@@ -71,7 +71,10 @@ const tagColors = {
 export function FeaturedJobs({ className }) {
   return (
     <section
-      className={cn("w-full bg-black text-white py-24 px-4 sm:px-6", className)}
+      className={cn(
+        "w-full bg-white dark:bg-black text-zinc-900 dark:text-white py-24 px-4 sm:px-6",
+        className,
+      )}
       aria-label="Featured job listings"
     >
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-12">
@@ -94,8 +97,8 @@ export function FeaturedJobs({ className }) {
           {jobs.map((job) => (
             <li key={job.id}>
               <article
-                className="group relative rounded-2xl border border-white/5 bg-[#0d0d0d] p-6
-                           hover:border-zinc-700/60 hover:bg-[#111111]
+                className="group relative rounded-2xl border border-white/5 shadow-2xl p-6
+                           hover:border-zinc-700/60 
                            transition-all duration-300 flex flex-col justify-between min-h-[200px]"
               >
                 {/* Card top */}
@@ -103,7 +106,7 @@ export function FeaturedJobs({ className }) {
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="text-base font-semibold text-zinc-100 group-hover:text-white transition-colors truncate">
+                        <h3 className="text-base font-semibold transition-colors truncate">
                           {job.title}
                         </h3>
                         {job.tag && (
@@ -159,12 +162,12 @@ export function FeaturedJobs({ className }) {
 
                 {/* Card footer */}
                 <div className="mt-5 pt-4 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-sm font-semibold text-zinc-300">
+                  <span className="text-sm font-semibold">
                     {job.salary}
                   </span>
                   <Link
                     href={`/jobs/${job.id}`}
-                    className="text-xs font-medium text-[#6366f1] group-hover:text-white
+                    className="text-xs font-medium text-[#6366f1] group-hover:text-black dark:group-hover:text-white
                                flex items-center gap-1 transition-colors duration-200
                                focus-visible:outline-none focus-visible:underline"
                     aria-label={`Apply for ${job.title} at ${job.company}`}

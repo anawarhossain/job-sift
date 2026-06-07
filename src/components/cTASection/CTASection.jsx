@@ -8,7 +8,7 @@ export function CTASection({ className }) {
   return (
     <section
       className={cn(
-        "relative w-full bg-black text-white overflow-hidden",
+        "relative w-full bg-white dark:bg-black text-zinc-900 dark:text-white overflow-hidden",
         className,
       )}
       aria-label="Call to action"
@@ -16,7 +16,7 @@ export function CTASection({ className }) {
       {/* ── CTA background grid image ── */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-[400px] pointer-events-none select-none"
+        className="hidden dark:block absolute inset-x-0 bottom-0 h-full pointer-events-none select-none"
       >
         <Image
           src="/cta-bg.png"
@@ -34,9 +34,9 @@ export function CTASection({ className }) {
       {/* Blue glow at bottom center */}
       <div
         aria-hidden="true"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2
+        className="hidden dark:block absolute top-10 left-1/2 -translate-x-1/2
                    w-[500px] sm:w-[700px] h-[200px]
-                   bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none"
+                   bg-indigo-600/80 rounded-full blur-[100px] pointer-events-none"
       />
 
       {/* ── Content ── */}
@@ -50,7 +50,7 @@ export function CTASection({ className }) {
         </h2>
 
         {/* Sub-description */}
-        <p className="text-sm sm:text-base text-zinc-500 max-w-md leading-relaxed font-light">
+        <p className="text-sm sm:text-base text-zinc-400 max-w-md leading-relaxed font-light">
           Build a profile in three minutes. The matches start arriving tomorrow
           morning.
         </p>
@@ -71,7 +71,7 @@ export function CTASection({ className }) {
             <Button
               radius="full"
               variant="bordered"
-              className="border-white/15 text-white font-medium hover:bg-white/5
+              className="border-white/15  font-medium hover:bg-black/30 dark:hover:bg-white/30
                        transition-all px-8 text-sm w-full sm:w-auto"
             >
               View pricing

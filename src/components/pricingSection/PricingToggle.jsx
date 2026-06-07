@@ -21,7 +21,7 @@ export function PricingToggle({ plans }) {
     <div className="w-full flex flex-col items-center gap-10">
       {/* Toggle */}
       <div
-        className="flex items-center bg-[#0d0d0d] border border-white/5 p-1 rounded-full"
+        className="flex items-center  border border-white/5 p-1 rounded-full"
         role="group"
         aria-label="Billing cycle"
       >
@@ -43,7 +43,7 @@ export function PricingToggle({ plans }) {
           className={cn(
             "px-5 py-1.5 text-xs font-medium rounded-full transition-all duration-200 flex items-center gap-1.5",
             isYearly
-              ? "bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white shadow-sm"
+              ? "bg-linear-to-r from-[#4f46e5] to-[#6366f1] text-white shadow-sm"
               : "text-zinc-500 hover:text-zinc-300",
           )}
         >
@@ -71,10 +71,10 @@ export function PricingToggle({ plans }) {
             <div
               key={plan.name}
               className={cn(
-                "rounded-2xl p-7 flex flex-col gap-6 transition-all duration-300 relative",
+                "rounded-2xl p-7 flex flex-col gap-6 transition-all duration-300 relative hover:outline-1",
                 isMain
-                  ? "bg-[#0d0d0d] border-2 border-[#4f46e5] shadow-2xl shadow-indigo-500/15 md:-translate-y-3 z-10"
-                  : "bg-[#080808] border border-white/5 hover:border-zinc-800",
+                  ? " border-2 border-[#4f46e5] shadow-2xl  shadow-indigo-500/15 md:-translate-y-3 z-10"
+                  : " border dark:border-white/50 hover:border-zinc-800",
               )}
             >
               {/* Popular badge */}
@@ -82,7 +82,7 @@ export function PricingToggle({ plans }) {
                 <div
                   aria-label="Most popular plan"
                   className="absolute -top-3 left-1/2 -translate-x-1/2
-                             bg-gradient-to-r from-[#4f46e5] to-[#6366f1]
+                             bg-linear-to-r from-[#4f46e5] to-[#6366f1]
                              text-white text-[10px] font-bold uppercase tracking-widest
                              px-3 py-1 rounded-full shadow-md whitespace-nowrap"
                 >
@@ -93,9 +93,7 @@ export function PricingToggle({ plans }) {
               {/* Plan header */}
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-base font-bold text-white">
-                    {plan.name}
-                  </h3>
+                  <h3 className="text-base font-bold ">{plan.name}</h3>
                   <p className="text-xs text-zinc-500 mt-0.5 max-w-[160px] leading-relaxed">
                     {plan.desc}
                   </p>
@@ -118,7 +116,7 @@ export function PricingToggle({ plans }) {
                 className="flex items-baseline gap-1"
                 aria-label={`Price: $${price} per month`}
               >
-                <span className="text-4xl font-extrabold text-white tracking-tight tabular-nums">
+                <span className="text-4xl font-extrabold tracking-tight tabular-nums">
                   ${price}
                 </span>
                 <span className="text-xs text-zinc-500 font-medium">
@@ -167,8 +165,8 @@ export function PricingToggle({ plans }) {
                 className={cn(
                   "font-medium text-sm py-5 transition-all duration-200",
                   isMain
-                    ? "bg-white text-black hover:bg-zinc-100"
-                    : "bg-transparent border border-white/10 text-white hover:bg-white/5",
+                    ? "bg-white dark:bg-black text-zinc-900 dark:text-white hover:bg-zinc-100"
+                    : " border border-white/10 text-white",
                 )}
               >
                 {plan.priceMonthly === 0

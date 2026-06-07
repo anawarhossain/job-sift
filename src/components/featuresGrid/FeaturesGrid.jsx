@@ -73,7 +73,7 @@ export function FeaturesGrid({ className }) {
   return (
     <section
       className={cn(
-        "w-full bg-black text-white py-24 px-4 sm:px-6 border-t border-white/5",
+        "w-full bg-white dark:bg-black text-zinc-900 dark:text-white py-24 px-4 sm:px-6 border-t border-white/5",
         className,
       )}
       aria-label="Platform features"
@@ -94,21 +94,21 @@ export function FeaturesGrid({ className }) {
           {features.map(({ id, title, description, Icon }) => (
             <div
               key={id}
-              className="group relative rounded-2xl border border-white/5 bg-[#080808] p-5
-                         hover:border-zinc-800 hover:bg-[#0d0d0d]
+              className="group relative rounded-2xl border shadow-2xl  p-5
+                         hover:border-zinc-800
                          transition-all duration-300 flex flex-col gap-4"
             >
               {/* Hover inner glow */}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none
-                           bg-gradient-to-br from-indigo-500/[0.03] to-transparent"
+                           bg-linear-to-br from-indigo-500/3 to-transparent"
               />
 
               {/* Icon */}
               <div
                 className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/15
-                           flex items-center justify-center flex-shrink-0
+                           flex items-center justify-center shrink-0
                            group-hover:border-indigo-500/30 transition-colors"
                 aria-hidden="true"
               >
@@ -117,7 +117,7 @@ export function FeaturesGrid({ className }) {
 
               {/* Text */}
               <div className="flex flex-col gap-1.5 relative z-10">
-                <h3 className="text-sm font-semibold text-zinc-100 group-hover:text-white transition-colors">
+                <h3 className="text-sm font-semibold transition-colors">
                   {title}
                 </h3>
                 <p className="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors leading-relaxed">

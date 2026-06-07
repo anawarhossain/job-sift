@@ -52,7 +52,7 @@ const plans = [
 export function PricingSection() {
   return (
     <section
-      className="w-full bg-black text-white py-24 px-4 sm:px-6 border-t border-white/5 relative overflow-hidden"
+      className="w-full bg-white dark:bg-black text-zinc-900 dark:text-white py-24 px-4 sm:px-6 border-t border-white/5 relative overflow-hidden"
       aria-label="Pricing plans"
     >
       {/* Subtle bg glow */}

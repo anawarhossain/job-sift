@@ -3,6 +3,14 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────── */
 :root {
+  /* Dark mode (default) */
+  --background: #000000;
+  --foreground: #ffffff;
+  --surface-1:  #080808;
+  --surface-2:  #0d0d0d;
+  --border:     rgba(255,255,255,0.05);
+  --text-muted: #52525b;
+
   --brand-indigo:     #6366f1;
   --brand-indigo-dark:#4f46e5;
   --brand-purple:     #7c3aed;
@@ -14,6 +22,16 @@
   --text-muted:       #52525b;
   --text-secondary:   #a1a1aa;
   --glow-indigo:      rgba(99,102,241,0.15);
+}
+
+/* Light mode */
+.light {
+  --background: #ffffff;
+  --foreground: #09090b;
+  --surface-1:  #f4f4f5;
+  --surface-2:  #e4e4e7;
+  --border:     rgba(0,0,0,0.08);
+  --text-muted: #71717a;
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -88,7 +106,7 @@ body {
 
 /* ─── Gradient text ──────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #fff 30%, var(--brand-indigo) 100%);
+  background: linear-gradient(135deg, #698b81 30%, var(--brand-indigo) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
