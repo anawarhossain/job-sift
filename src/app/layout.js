@@ -52,8 +52,10 @@ export default function RootLayout({ children }) {
           enableSystem={false} // system preference নেবে না
           disableTransitionOnChange={false}
         >
+          {/* // remove navbar dont't show in signup and signin page */}
           <UseNavbar />
           <main className="flex-1">{children}</main>
+          {/* // remove Footer dont't show in signup and signin page */}
           <Footer />
         </ThemeProvider>
       </body>
