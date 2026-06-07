@@ -27,16 +27,16 @@ export function HeroSection() {
           className="object-cover object-top opacity-100"
         />
         {/* Top-to-bottom fade: content side se seamless merge */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-b from-black via-black/30 to-transparent" />
         {/* Bottom fade: footer transition ke smooth kora */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent" />
       </div>
 
       {/* Blue glow at bottom center */}
       <div
         aria-hidden="true"
         className="hidden dark:block absolute bottom-0 left-1/2 -translate-x-1/2
-                         w-[500px] sm:w-[700px] h-[200px]
+                         w-125 sm:w-175 h-50
                          bg-indigo-500/50 rounded-full blur-[100px] pointer-events-none"
       />
 

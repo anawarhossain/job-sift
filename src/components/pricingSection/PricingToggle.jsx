@@ -91,7 +91,7 @@ export function PricingToggle({ plans }) {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-base font-bold ">{plan.name}</h3>
-                  <p className="text-xs text-zinc-500 mt-0.5 max-w-[160px] leading-relaxed">
+                  <p className="text-xs text-zinc-500 mt-0.5 max-w-40 leading-relaxed">
                     {plan.desc}
                   </p>
                 </div>
@@ -139,7 +139,7 @@ export function PricingToggle({ plans }) {
                   >
                     <Check
                       className={cn(
-                        "mt-0.5 flex-shrink-0 w-3.5 h-3.5",
+                        "mt-0.5 shrink-0 w-3.5 h-3.5",
                         isMain ? "text-[#6366f1]" : "text-zinc-600",
                       )}
                       aria-hidden="true"
