@@ -184,11 +184,10 @@ export function SignInForm() {
 
     setLoading(true);
     try {
-      const { error } = await authClient.signIn.email({
+      const { data, error } = await authClient.signIn.email({
         email: email.trim().toLowerCase(),
         password,
         rememberMe,
-        callbackURL: "/",
       });
 
       if (error) {
@@ -208,7 +207,15 @@ export function SignInForm() {
           type: "success",
           text: "Welcome back! Redirecting you…",
         });
-        setTimeout(() => router.push("/"), 1500);
+
+        // ✅ Role-based redirect
+        const role = data?.user?.role;
+        setTimeout(() => {
+          if (role === "Recruiter") router.push("/dashboard/recruiter");
+          else if (role === "Seeker") router.push("/dashboard/seeker");
+          else router.push("/");
+          router.refresh();
+        }, 1200);
       }
     } catch {
       setFormMessage({
