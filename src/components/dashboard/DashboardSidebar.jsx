@@ -1,11 +1,8 @@
+
 import {
-  Bell,
   Briefcase,
-  Envelope,
   Gear,
-  House,
   LayoutSideContent,
-  Magnifier,
   Person,
 } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
@@ -13,7 +10,8 @@ import Link from "next/link";
 import { CiMoneyBill } from "react-icons/ci";
 import { MdOutlineDashboard, MdOutlineFactory } from "react-icons/md";
 
-const DashboardSidebar = () => {
+const DashboardSidebar = async () => {
+
   const recruiterNavItems = [
     { icon: MdOutlineDashboard, href: "/recruiter", label: "Dashboard" },
     { icon: MdOutlineFactory, href: "#", label: "My Company" },
