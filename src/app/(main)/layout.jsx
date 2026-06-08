@@ -6,9 +6,11 @@ import { Footer } from "@/components/footer/Footer";
 export default function MainLayout({ children }) {
   return (
     <>
-      <UseNavbar />
+      {/* // show navbar in signup and signin page */}
+      {/* <UseNavbar /> */}
       <main className="flex-1">{children}</main>
-      <Footer />
+      {/* //  show Footer in signup and signin page */}
+      {/* <Footer /> */}
     </>
   );
 }
