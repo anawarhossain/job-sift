@@ -69,7 +69,9 @@ export function PricingToggle({ plans }) {
           const price = isYearly ? plan.priceYearly : plan.priceMonthly;
 
           return (
-            <div
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.2 }}
               key={plan.name}
               className={cn(
                 "rounded-2xl p-7 flex flex-col gap-6 transition-all duration-300 relative hover:outline-1",
@@ -171,7 +173,7 @@ export function PricingToggle({ plans }) {
                   ? "Get Started Free"
                   : "Choose This Plan"}
               </Button>
-            </div>
+            </motion.div>
           );
         })}
       </div>
