@@ -1,5 +1,6 @@
 import {
   Bell,
+  Briefcase,
   Envelope,
   Gear,
   House,
@@ -8,30 +9,34 @@ import {
   Person,
 } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
+import Link from "next/link";
+import { CiMoneyBill } from "react-icons/ci";
+import { MdOutlineDashboard, MdOutlineFactory } from "react-icons/md";
 
 const DashboardSidebar = () => {
-  const navItems = [
-    { icon: House, label: "Home" },
-    { icon: Magnifier, label: "Search" },
-    { icon: Bell, label: "Notifications" },
-    { icon: Envelope, label: "Messages" },
-    { icon: Person, label: "Profile" },
-    { icon: Gear, label: "Settings" },
-    ];
+  const recruiterNavItems = [
+    { icon: MdOutlineDashboard, href: "/recruiter", label: "Dashboard" },
+    { icon: MdOutlineFactory, href: "#", label: "My Company" },
+    { icon: Briefcase, href: "#", label: "Manage Jobs" },
+    { icon: CiMoneyBill, href: "#", label: "Applications" },
+    { icon: Person, href: "#", label: "Profile" },
+    { icon: Gear, href: "#", label: "Settings" },
+  ];
     
 
 
     const navManuItem = (
       <nav className="flex flex-col gap-1">
-        {navItems.map((item) => (
-          <button
+        {recruiterNavItems.map((item) => (
+          <Link
+            href={item.href}
             key={item.label}
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
             type="button"
           >
             <item.icon className="size-5 text-muted" />
             {item.label}
-          </button>
+          </Link>
         ))}
       </nav>
     );
