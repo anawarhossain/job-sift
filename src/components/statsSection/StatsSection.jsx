@@ -40,7 +40,7 @@ export function StatsSection({ className }) {
         aria-hidden="true"
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
       >
-        <div className="w-[500px] h-[200px] bg-indigo-600/5 rounded-full blur-[100px]" />
+        <div className="w-125 h-50 bg-indigo-600/5 rounded-full blur-[100px]" />
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10 text-center">
