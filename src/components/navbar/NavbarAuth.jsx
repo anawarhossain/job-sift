@@ -48,7 +48,7 @@ function AuthenticatedButtons({ user }) {
       {/* Post a Job — only visible when logged in */}
       <Link
         href="/post-job"
-        className="hidden md:inline-flex items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 hover:text-white text-sm font-medium px-4 py-2 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+        className="hidden md:inline-flex items-center justify-center rounded-xl border border-white/8 bg-white/4 hover:bg-white/8 text-zinc-300 hover:text-white text-sm font-medium px-4 py-2 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
       >
         Post a Job
       </Link>

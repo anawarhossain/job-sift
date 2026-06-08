@@ -56,7 +56,7 @@ export function UserAvatar({ name = "", image = null, size = "md" }) {
   return (
     <span
       aria-label={name}
-      className={`${sizeClass} rounded-full bg-gradient-to-br ${colorClass} flex items-center justify-center font-semibold text-white ring-2 ring-white/10 shrink-0 select-none`}
+      className={`${sizeClass} rounded-full bg-linear-to-br ${colorClass} flex items-center justify-center font-semibold text-white ring-2 ring-white/10 shrink-0 select-none`}
     >
       {initials}
     </span>

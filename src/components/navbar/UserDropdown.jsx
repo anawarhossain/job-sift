@@ -133,10 +133,10 @@ export function UserDropdown({ user }) {
         aria-expanded={open}
         aria-haspopup="true"
         aria-label="User menu"
-        className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-white/[0.08] px-2.5 py-1.5 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+        className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/4 hover:bg-white/8 px-2.5 py-1.5 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
       >
         <UserAvatar name={user.name} image={user.image} size="sm" />
-        <span className="hidden sm:block text-sm font-medium text-zinc-200 max-w-[120px] truncate">
+        <span className="hidden sm:block text-sm font-medium text-zinc-200 max-w-30 truncate">
           {user.name?.split(" ")[0] ?? "Account"}
         </span>
         <ChevronIcon open={open} />
@@ -150,7 +150,7 @@ export function UserDropdown({ user }) {
           className="absolute right-0 top-[calc(100%+10px)] w-64 rounded-2xl border border-white/[0.07] bg-[#0e0e0e]/95 backdrop-blur-xl shadow-2xl shadow-black/60 overflow-hidden z-50 animate-fade-up"
         >
           {/* User info header */}
-          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/[0.06]">
+          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/6">
             <UserAvatar name={user.name} image={user.image} size="md" />
             <div className="flex flex-col min-w-0">
               <span className="text-sm font-semibold text-white truncate">
@@ -170,9 +170,9 @@ export function UserDropdown({ user }) {
                 href={item.href}
                 role="menuitem"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-all duration-150 group"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-400 hover:text-white hover:bg-white/6 transition-all duration-150 group"
               >
-                <span className="w-7 h-7 rounded-lg bg-white/[0.04] group-hover:bg-white/[0.08] flex items-center justify-center transition-colors shrink-0">
+                <span className="w-7 h-7 rounded-lg bg-white/4 group-hover:bg-white/8 flex items-center justify-center transition-colors shrink-0">
                   <MenuIcon d={item.icon} />
                 </span>
                 {item.label}
@@ -181,7 +181,7 @@ export function UserDropdown({ user }) {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-white/[0.06] mx-2" />
+          <div className="h-px bg-white/6 mx-2" />
 
           {/* Sign out */}
           <div className="py-2 px-2">
@@ -189,9 +189,9 @@ export function UserDropdown({ user }) {
               role="menuitem"
               onClick={handleSignOut}
               disabled={loggingOut}
-              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400 hover:text-red-300 hover:bg-red-500/[0.08] transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed group"
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400 hover:text-red-300 hover:bg-red-500/8 transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed group"
             >
-              <span className="w-7 h-7 rounded-lg bg-red-500/[0.08] group-hover:bg-red-500/[0.12] flex items-center justify-center transition-colors shrink-0">
+              <span className="w-7 h-7 rounded-lg bg-red-500/8 group-hover:bg-red-500/12 flex items-center justify-center transition-colors shrink-0">
                 {loggingOut ? (
                   <Spinner />
                 ) : (

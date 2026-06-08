@@ -5,6 +5,7 @@ import { Check, Compass, ChartLine, Star } from "@gravity-ui/icons";
 import { Button } from "@heroui/react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 // Icon renderer — iconKey string theke JSX render
 function PlanIcon({ iconKey, isPopular }) {
