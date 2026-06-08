@@ -7,6 +7,7 @@ import { AuthField } from "./AuthField";
 import { AuthMessage } from "./AuthMessage";
 import { PasswordStrength } from "./PasswordStrength";
 import { authClient } from "@/lib/auth-client";
+import { Description, Label, Radio, RadioGroup } from "@heroui/react";
 
 // ── Validation helpers ────────────────────────────────────────────
 function validateName(v) {
@@ -131,6 +132,7 @@ export function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [role, setRole] = useState("Seeker");
 
   // Field-level errors (shown after first blur)
   const [errors, setErrors] = useState({
@@ -212,6 +214,7 @@ export function SignUpForm() {
       const { error } = await authClient.signUp.email({
         name: name.trim(),
         email: email.trim().toLowerCase(),
+        role,
         password,
         callbackURL: "/",
       });
@@ -397,6 +400,35 @@ export function SignUpForm() {
           </button>
         </div>
       </AuthField>
+
+      {/* Roles Section */}
+      <div className="flex flex-col gap-4">
+        <Label>Role Select</Label>
+        <RadioGroup
+          defaultValue="Seeker"
+          name="role"
+          onChange={(value) => setRole(value)}
+          orientation="horizontal"
+          
+        >
+          <Radio value="Seeker">
+            <Radio.Control className="border border-black/80 dark:border-white/80">
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Seeker</Label>
+            </Radio.Content>
+          </Radio>
+          <Radio value="Recruiter">
+            <Radio.Control className="border border-black/80 dark:border-white/80">
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Recruiter</Label>
+            </Radio.Content>
+          </Radio>
+        </RadioGroup>
+      </div>
 
       {/* ── Terms notice ── */}
       <p className="text-xs text-zinc-600 leading-relaxed -mt-1">
