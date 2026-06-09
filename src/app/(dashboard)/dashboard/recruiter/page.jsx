@@ -1,11 +1,11 @@
-// ✅ Server Component
+// Server Component
 import { requireRole } from "@/lib/core/session";
 import { DashboardStatCard } from "@/components/dashboard/DashboardStatCard";
 import { RecentApplicationsTable } from "@/components/dashboard/RecentApplicationsTable";
 import { TopCompaniesPanel } from "@/components/dashboard/TopCompaniesPanel";
+import { PostJobButton } from "@/components/dashboard/postJob/PostJobButton";
 import Link from "next/link";
 
-// ── Stat cards config ─────────────────────────────────────────
 const stats = [
   {
     label: "Total Job Posts",
@@ -19,11 +19,7 @@ const stats = [
     iconPath:
       "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z",
   },
-  {
-    label: "Active Jobs",
-    value: "18",
-    iconPath: "M13 10V3L4 14h7v7l9-11h-7z",
-  },
+  { label: "Active Jobs", value: "18", iconPath: "M13 10V3L4 14h7v7l9-11h-7z" },
   {
     label: "Jobs Closed",
     value: "32",
@@ -32,28 +28,31 @@ const stats = [
 ];
 
 export default async function RecruiterDashboard() {
-  // ✅ requireRole — not logged in হলে /sign-in, wrong role হলে /unauthorized
   const user = await requireRole("Recruiter");
 
+  // Company data — real project-e DB theke ashbe
+  const company = {
+    name: user.companyName ?? "TechFlow Inc.",
+    plan: user.plan ?? "Growth",
+    activeJobs: 7,
+    approved: true,
+  };
+
   return (
-    <div className="flex flex-col gap-8 ">
-      {/* ── Welcome heading ── */}
+    <div className="flex flex-col gap-8 max-w-[1400px]">
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
           Welcome back, {user.name}
         </h1>
       </div>
 
-      {/* ── Stats grid — 4 cards ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {stats.map((stat) => (
           <DashboardStatCard key={stat.label} {...stat} />
         ))}
       </div>
 
-      {/* ── Bottom section — table + companies panel ── */}
       <div className="grid grid-cols-1 xl:grid-cols-[1fr_360px] gap-6 items-start">
-        {/* Recent Applications */}
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-white">
@@ -69,7 +68,6 @@ export default async function RecruiterDashboard() {
           <RecentApplicationsTable />
         </section>
 
-        {/* My Top Companies */}
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-white">
@@ -85,6 +83,9 @@ export default async function RecruiterDashboard() {
           <TopCompaniesPanel />
         </section>
       </div>
+
+      {/* PostJobButton: server theke company data pass — client sirf modal handle kore */}
+      <PostJobButton company={company} />
     </div>
   );
 }
