@@ -18,7 +18,7 @@ import {
 // Single-line strings — no hydration mismatch
 const base =
   "w-full bg-[#111111] text-sm text-zinc-200 placeholder-zinc-600 rounded-xl border px-3.5 py-2.5 outline-none transition-all duration-150 focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500/50 disabled:opacity-50";
-const normal = base + " border-white/[0.08] hover:border-white/[0.14]";
+const normal = base + " border-white/8 hover:border-white/[0.14]";
 const errored =
   base + " border-red-500/40 focus:ring-red-500/20 focus:border-red-500/50";
 const success = base + " border-emerald-500/25 focus:ring-emerald-500/15";
@@ -46,7 +46,7 @@ function SectionHeading({ step, title, subtitle }) {
 
 // ── Section divider ───────────────────────────────────────────
 function SectionDivider() {
-  return <hr className="border-none h-px bg-white/[0.05] my-6" />;
+  return <hr className="border-none h-px bg-white/5 my-6" />;
 }
 
 // ── Spinner ───────────────────────────────────────────────────
@@ -113,30 +113,40 @@ export function PostJobModal({ isOpen, onClose, company }) {
     };
   }, [isOpen]);
 
-  // Close on Escape
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e) => {
-      if (e.key === "Escape") handleClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [isOpen]);
-
-  // Reset when reopened
-  useEffect(() => {
-    if (isOpen) {
+    // Reset when reopened
+    
+//   useEffect(() => {
+//     if (isOpen) {
+//       setForm(INITIAL_FORM_STATE);
+//       setErrors({});
+//       setTouched({});
+//       setSubmitted(false);
+//     }
+    //   }, [isOpen]);
+    
+    const resetForm = () => {
       setForm(INITIAL_FORM_STATE);
       setErrors({});
       setTouched({});
       setSubmitted(false);
-    }
-  }, [isOpen]);
+    };
 
   const handleClose = useCallback(() => {
-    if (loading) return;
+      if (loading) return;
+      
+      resetForm();
     onClose();
   }, [loading, onClose]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e) => {
+      if (e.key === "Escape");
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, handleClose]);
 
   // ── Field change ──────────────────────────────────────────
   const set = (field, value) => {
@@ -216,7 +226,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
           className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           onClick={handleClose}
         />
-        <div className="relative z-10 w-full max-w-md bg-[#0e0e0e] border border-white/[0.08] rounded-2xl p-10 flex flex-col items-center gap-5 text-center shadow-2xl">
+        <div className="relative z-10 w-full max-w-md bg-[#0e0e0e] border border-white/8 rounded-2xl p-10 flex flex-col items-center gap-5 text-center shadow-2xl">
           <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center">
             <svg
               className="w-8 h-8 text-emerald-400"
@@ -241,7 +251,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
           </div>
           <button
             onClick={handleClose}
-            className="w-full rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white text-sm font-semibold py-3 hover:opacity-90 transition-opacity"
+            className="w-full rounded-xl bg-linear-to-r from-[#4f46e5] to-[#6366f1] text-white text-sm font-semibold py-3 hover:opacity-90 transition-opacity"
           >
             Done
           </button>
@@ -265,9 +275,9 @@ export function PostJobModal({ isOpen, onClose, company }) {
       />
 
       {/* Modal panel */}
-      <div className="relative z-10 w-full sm:max-w-2xl max-h-[95dvh] sm:max-h-[90dvh] flex flex-col bg-[#0e0e0e] border border-white/[0.08] sm:rounded-2xl rounded-t-2xl shadow-2xl shadow-black/60 overflow-hidden">
+      <div className="relative z-10 w-full sm:max-w-2xl max-h-[95dvh] sm:max-h-[90dvh] flex flex-col bg-[#0e0e0e] border border-white/8 sm:rounded-2xl rounded-t-2xl shadow-2xl shadow-black/60 overflow-hidden">
         {/* ── Header ── */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/6 shrink-0">
           <div>
             <h2
               id={`${uid}-modal-title`}
@@ -293,7 +303,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
             onClick={handleClose}
             disabled={loading}
             aria-label="Close modal"
-            className="w-8 h-8 flex items-center justify-center rounded-xl text-zinc-500 hover:text-white hover:bg-white/[0.08] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            className="w-8 h-8 flex items-center justify-center rounded-xl text-zinc-500 hover:text-white hover:bg-white/8 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             <CloseIcon />
           </button>
@@ -419,7 +429,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
                     className={
                       form.type === t
                         ? "px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600/25 text-indigo-300 border border-indigo-500/40 transition-all"
-                        : "px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-400 border border-white/[0.08] hover:border-white/[0.18] hover:text-zinc-200 transition-all"
+                        : "px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-400 border border-white/8 hover:border-white/18 hover:text-zinc-200 transition-all"
                     }
                   >
                     {t}
@@ -527,7 +537,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
                   disabled={loading || limitReached}
                   className="sr-only peer"
                 />
-                <div className="w-9 h-5 rounded-full bg-white/[0.08] border border-white/[0.10] peer-checked:bg-indigo-600 peer-checked:border-indigo-600 transition-all duration-200" />
+                <div className="w-9 h-5 rounded-full bg-white/8 border border-white/10 peer-checked:bg-indigo-600 peer-checked:border-indigo-600 transition-all duration-200" />
                 <div className="absolute left-0.5 top-0.5 w-4 h-4 rounded-full bg-white/40 peer-checked:bg-white peer-checked:translate-x-4 transition-all duration-200" />
               </div>
               <span className="text-xs font-medium text-zinc-400 group-hover:text-zinc-300 transition-colors">
@@ -716,9 +726,9 @@ export function PostJobModal({ isOpen, onClose, company }) {
             subtitle="Auto-filled from your registered company."
           />
 
-          <div className="flex items-center gap-4 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02]">
+          <div className="flex items-center gap-4 p-4 rounded-xl border border-white/6 bg-white/2">
             {/* Company initial avatar */}
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-lg font-bold shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-lg font-bold shrink-0">
               {(company?.name ?? "C")[0].toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
@@ -768,7 +778,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
         </form>
 
         {/* ── Footer — sticky ── */}
-        <div className="shrink-0 flex items-center justify-between gap-3 px-6 py-4 border-t border-white/[0.06] bg-[#0a0a0a]">
+        <div className="shrink-0 flex items-center justify-between gap-3 px-6 py-4 border-t border-white/6 bg-[#0a0a0a]">
           <p className="text-xs text-zinc-600">
             <span className="text-red-400">*</span> Required fields
           </p>
@@ -777,7 +787,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
               type="button"
               onClick={handleClose}
               disabled={loading}
-              className="px-5 py-2.5 rounded-xl text-sm font-medium text-zinc-400 border border-white/[0.08] hover:bg-white/[0.05] hover:text-zinc-200 transition-all disabled:opacity-50"
+              className="px-5 py-2.5 rounded-xl text-sm font-medium text-zinc-400 border border-white/8 hover:bg-white/5 hover:text-zinc-200 transition-all disabled:opacity-50"
             >
               Cancel
             </button>
@@ -786,7 +796,7 @@ export function PostJobModal({ isOpen, onClose, company }) {
               form={`${uid}-form`}
               disabled={loading || limitReached}
               aria-busy={loading}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white shadow-lg shadow-indigo-500/20 hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold bg-linear-to-r from-[#4f46e5] to-[#6366f1] text-white shadow-lg shadow-indigo-500/20 hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
             >
               {loading && <Spinner />}
               {loading ? "Posting…" : "Post Job"}

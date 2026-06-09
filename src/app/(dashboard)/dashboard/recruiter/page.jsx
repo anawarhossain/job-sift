@@ -39,7 +39,7 @@ export default async function RecruiterDashboard() {
   };
 
   return (
-    <div className="flex flex-col gap-8 max-w-[1400px]">
+    <div className="flex flex-col gap-8 ">
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
           Welcome back, {user.name}
