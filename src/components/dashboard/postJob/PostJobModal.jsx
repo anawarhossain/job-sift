@@ -114,16 +114,6 @@ export function PostJobModal({ isOpen, onClose, company }) {
   }, [isOpen]);
 
     // Reset when reopened
-    
-//   useEffect(() => {
-//     if (isOpen) {
-//       setForm(INITIAL_FORM_STATE);
-//       setErrors({});
-//       setTouched({});
-//       setSubmitted(false);
-//     }
-    //   }, [isOpen]);
-    
     const resetForm = () => {
       setForm(INITIAL_FORM_STATE);
       setErrors({});
