@@ -38,7 +38,37 @@ function MenuIcon({ d }) {
 }
 
 // ── Dropdown menu items config ────────────────────────────────
-const menuItems = [
+const recruiterMenuItems = [
+  {
+    label: "Dashboard",
+    href: "/dashboard/recruiter",
+    icon: "M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z",
+  },
+  {
+    label: "My Company",
+    href: "/dashboard/recruiter/company",
+    icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+  },
+  {
+    label: "Manage Jobs",
+    href: "/dashboard/recruiter/jobs",
+    icon: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  },
+  {
+    label: "Applications",
+    href: "/dashboard/recruiter/applications",
+    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+  },
+  {
+    label: "Settings",
+    href: "/dashboard/recruiter/settings",
+    icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z",
+    d2: "M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+  },
+];
+
+
+const seekerMenuItems = [
   {
     label: "My Profile",
     href: "/profile",
@@ -60,6 +90,9 @@ const menuItems = [
     icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
   },
 ];
+
+
+
 
 // ── Spinner ───────────────────────────────────────────────────
 function Spinner() {
@@ -93,6 +126,9 @@ export function UserDropdown({ user }) {
   const [open, setOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
   const dropdownRef = useRef(null);
+  const role = user?.role;
+  console.log(role);
+  const menuItems = role === "Recruiter" ? recruiterMenuItems : seekerMenuItems;
 
   // Close on outside click
   useEffect(() => {
@@ -135,9 +171,9 @@ export function UserDropdown({ user }) {
         aria-label="User menu"
         className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/4 hover:bg-white/8 px-2.5 py-1.5 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
       >
-        <UserAvatar name={user.name} image={user.image} size="sm" />
+        <UserAvatar name={user?.name} image={user?.image} size="sm" />
         <span className="hidden sm:block text-sm font-medium text-zinc-200 max-w-30 truncate">
-          {user.name?.split(" ")[0] ?? "Account"}
+          {user?.name?.split(" ")[0] ?? "Account"}
         </span>
         <ChevronIcon open={open} />
       </button>

@@ -78,11 +78,7 @@ export async function NavbarAuth() {
 
   return (
     <AuthenticatedButtons
-      user={{
-        name: user.name ?? "User",
-        email: user.email ?? "",
-        image: user.image ?? null,
-      }}
+      user={user}
     />
   );
 }
