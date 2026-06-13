@@ -50,7 +50,7 @@ function AuthenticatedButtons({ user }) {
         href="/post-job"
         className="hidden md:inline-flex items-center justify-center rounded-xl border border-white/8 bg-white/4 hover:bg-white/8 text-zinc-300 hover:text-white text-sm font-medium px-4 py-2 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
       >
-        Post a Job
+        {user?.role === "Recruiter" ? 'Post a Job' : 'apply Job'}
       </Link>
 
       {/* Client component — only the dropdown interaction is client-side */}
